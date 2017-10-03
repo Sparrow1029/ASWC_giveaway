@@ -4,10 +4,13 @@
 import twitter
 import json
 
-# api = twitter.Api(consumer_key='',
-#                   consumer_secret='',
-#                   access_token_key='',
-#                   access_token_secret='')
+with open ('/Users/alexray/Documents/python_work/twitOAuth.txt', 'r') as f:
+    keys = f.read().splitlines()
+
+api = twitter.Api(consumer_key=keys[0],
+                  consumer_secret=keys[1],
+                  access_token_key=keys[2],
+                  access_token_secret=keys[3])
 
 
 # IT'S ALIVE!
@@ -27,7 +30,7 @@ for r in results:
     obj = json.loads(r.AsJsonString())
     print("'Tweet ID:' {}\n'User': {}, {}\n'Links': {}".format(
     obj['id'], obj['user']['screen_name'], obj['user']['name'], obj['urls']
-    ))
+    ).encode('utf-8'))
 
 
 # TODO: Take the user_id from the returned json object and append it into
