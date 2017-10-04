@@ -72,7 +72,6 @@ for o in nextSet:
 for k, v in usr_dict.items():
     print("User {}: {} -> Tweet ID: {}".format(v[0], k, v[1]))
 
-print(cnt)
 print(len(usr_dict))
 
 
