@@ -4,7 +4,7 @@
 import twitter
 import json
 
-with open ('/Users/alexray/Documents/python_work/twitOAuth.txt', 'r') as f:
+with open ('/home/sparrow/Documents/python_Work/twitOAuth.txt', 'r') as f:
     keys = f.read().splitlines()
 
 api = twitter.Api(consumer_key=keys[0],
