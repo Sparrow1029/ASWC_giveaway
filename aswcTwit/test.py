@@ -3,6 +3,13 @@
 
 import twitter
 import json
+from time import sleep
+
+
+"""
+A simple twitter API implementation
+to search for a hashtag and catalogue the results.
+"""
 
 with open ('/home/sparrow/Documents/python_Work/twitOAuth.txt', 'r') as f:
     keys = f.read().splitlines()
@@ -25,9 +32,9 @@ api = twitter.Api(consumer_key=keys[0],
 # url = "https://api.twitter.com/1.1/search/tweets.json"
 # request_method = 'GET'
 
-hashtag = 'inktober'
+hashtag = 'inktober2017'
 num_tweets = '180'  # This is set to 180, but still only returns 100
-date = '2017-10-01'
+date = '2017-10-02'
 
 
 def create_query(hashtag, num_tweets, start):
@@ -40,11 +47,11 @@ def create_query(hashtag, num_tweets, start):
     getfield = 'l=en&q=%23'+hashtag+'&since%3A'+start+'&count='+num_tweets
     return getfield
 
+search_url = create_query(hashtag, num_tweets, date)
 
 # TODO: DRY this next part up.
 
-results = api.GetSearch(raw_query=create_query(hashtag, num_tweets, date))
-
+results = api.GetSearch(raw_query=search_url)
 usr_dict = {}
 
 for r in results:
@@ -60,7 +67,7 @@ for k, v in usr_dict.items():
     print("User {}: {} -> Tweet ID: {}".format(v[0], k, v[1]))
 
 print(len(usr_dict))  # seeing if any new ones were added
-
+sleep(2)
 since_id = max([int(v[1]) for k, v in usr_dict.items()])
 print(since_id)
 
